@@ -10,14 +10,12 @@ public class FileInput {
 
     //declare appropriate data types for loading information from file to be passed to FSA
 
-    private String inputPath = "/MachineInput.txt";
-    private String finalStates, alphabet, currentLine;
-    private ArrayList<String> transitions = new ArrayList<>();
-    private ArrayList<String> testStrings = new ArrayList<>();
-    private int totalStates;
+    private static final String ALPHABET = "a b c d e f g h i j k l m n o p q r s t u v w x y z";
 
-    FileReader file = new FileReader(inputPath);
-    BufferedReader read = new BufferedReader(file);
+    private String inputPath = "MachineInput.txt";
+    private String currentLine, initialRead, testLine;
+    private ArrayList<String> testStrings = new ArrayList<>();
+    private ArrayList alphabet = new ArrayList();
 
     /**
      * Class constructor calls {@link #readFile() readFile} to begin file reading
@@ -31,45 +29,43 @@ public class FileInput {
      * @throws IOException if file can't be read from
      */
     private void readFile() throws IOException{
-        //iteration of machine
+
+        //iteration count of machine
         int counter= 1;
-        currentLine="***";
+        currentLine=" ";
         boolean exit = false;
+        initialRead = "";
         try{
 
-            //read current line
-            currentLine = read.readLine();
+            FileReader file = new FileReader(inputPath);
+            BufferedReader read = new BufferedReader(file);
+
 
             //while currentLine is not empty
             while(!exit  && !(currentLine.isEmpty())){
 
+                //read current line
+                currentLine = read.readLine();
+
                 //if '*' then new FSA machine
                 if(("***").equals(currentLine)){
 
-
-                    transitions.clear();
-
                     //Read appropriate information and parse when needed
-                    totalStates = Integer.parseInt(read.readLine());
-                    finalStates = read.readLine();
-                    alphabet = read.readLine();
+                    initialRead = read.readLine();
+                    testLine = read.readLine();
 
-                    currentLine = read.readLine();
+                    populateAlphabet();
 
-                    transitions = getTrans();
                     testStrings = getTesters();
-
                     //Pass on info to FSA
                     //FSA fsa = new FSA(totalStates, finalStates, alphabet, transitions, testStrings, counter);
-
-                    testStrings.clear();
-
                     counter++;
                 }
                 if(currentLine==null)
                     exit = true;
 
             }
+
             System.out.println("Done!");
             read.close();
         }
@@ -81,36 +77,24 @@ public class FileInput {
         }
     }
 
-    /*
-        This method checks to see if line starts with a '('
-        indicating a transition. Continues to loop over until not found
+    /**
+     * This method parses the line with the test strings from the input file into an array list
+     * @return ArrayList populated with individual test strings
      */
-    private ArrayList<String> getTrans() throws IOException {
+    private ArrayList<String> getTesters(){
 
-        while(currentLine.contains("("))
-        {
-            transitions.add(currentLine);
-            currentLine = read.readLine();
-        }
-
-        return transitions;
-    }
-
-    /*
-        This method copies test strings into the ArrayList
-        Loops until line is empty or it is a new FSA
-     */
-    private ArrayList<String> getTesters() throws IOException {
-
-        boolean exit = false;
-        while( !exit &&((!currentLine.contains("***")) && ((currentLine)!=null)) )
-        {
-            testStrings.add(currentLine);
-            currentLine = read.readLine();
-            //avoid NullPointerException
-            if(currentLine==null)
-                exit=true;
+        String[] temp = testLine.split(" ");
+        for(String var : temp){
+            testStrings.add(var);
         }
         return testStrings;
+    }
+
+
+    private void populateAlphabet(){
+        String[] alphabet = ALPHABET.split(" ");
+        for(String str: alphabet){
+            this.alphabet.add(str);
+        }
     }
 }
