@@ -15,7 +15,7 @@ public class FileInput {
     private String inputPath = "MachineInput.txt";
     private String currentLine, initialRead, testLine;
     private ArrayList<String> testStrings = new ArrayList<>();
-    private ArrayList alphabet = new ArrayList();
+
 
     /**
      * Class constructor calls {@link #readFile() readFile} to begin file reading
@@ -54,11 +54,9 @@ public class FileInput {
                     initialRead = read.readLine();
                     testLine = read.readLine();
 
-                    populateAlphabet();
-
                     testStrings = getTesters();
                     //Pass on info to FSA
-                    //FSA fsa = new FSA(totalStates, finalStates, alphabet, transitions, testStrings, counter);
+                    NFSA nfa = new NFSA(initialRead, testStrings, counter);
                     counter++;
                 }
                 if(currentLine==null)
@@ -91,10 +89,4 @@ public class FileInput {
     }
 
 
-    private void populateAlphabet(){
-        String[] alphabet = ALPHABET.split(" ");
-        for(String str: alphabet){
-            this.alphabet.add(str);
-        }
-    }
 }
