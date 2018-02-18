@@ -11,17 +11,18 @@ public class NFSA {
     private HashMap<Character, Integer> internalAlphabet = new HashMap<>();
     private int totalStates;
     private boolean[] finalState;
-    private ArrayList<String> testers;
+    private ArrayList<String> testers, transitionArray;
     private ArrayList<Character> actualAlphabet;
     private String firstLine;
     private String[] initInput;
-    HashSet<Integer>[][] nfa;
+    Set<Integer>[][] nfa;
 
 
     public NFSA(String initialRead, ArrayList<String> testStrings, int iteration) throws IOException{
 
         firstLine = initialRead;
         testers = testStrings;
+        transitionArray = new ArrayList<>();
         actualAlphabet = new ArrayList<>();
         totalStates = 1;
         //parse out total state number and alphabet
@@ -58,7 +59,7 @@ public class NFSA {
 
         }
         catch(IOException i){
-            i.printStackTrace();
+            System.out.println("Unable to print.");
         }
     }
 
@@ -74,9 +75,27 @@ public class NFSA {
 
                 if(!(nfa[i][j].isEmpty())){
                     //bw.write("        " + "i " + actualAlphabet.get(j).toString() +  "\n");
+                    transitionArray.add("        " + "i " + actualAlphabet.get(j).toString() + printSet(i,j) +  "\n");
                 }
             }
         }
+
+        //write all transitions
+        for(String s : transitionArray){
+            bw.write(s + "\n");
+        }
+    }
+
+    //This method navigates through given set and returns a string of all the integers in the set
+    private String printSet(int firstIndex, int secondIndex){
+        StringBuilder sb = new StringBuilder();
+        Set<Integer> tempSet = nfa[firstIndex][secondIndex];
+
+        for(Integer i : tempSet){
+            sb.append(i + " ");
+        }
+
+        return sb.toString();
     }
 
     /**
@@ -100,36 +119,64 @@ public class NFSA {
      * Also keeps track of the alphabet and numbers them internally
      */
     private void loadMachine(){
-        nfa = new HashSet[totalStates][actualAlphabet.size()];
+        initializeSets();
 
         int currentState = 0;
-
+        int lastPass = 0;
+        ArrayList<Character> tempAlphabet = new ArrayList<>();
         //loop through characters in each string and add each one to the list of letters and the map to number it
         //Also start creating nfa by adding transitions.
         //currentState represents the count of state we are in
         //We use the map to get the internal number for the letter
         for(String input: initInput){
             char[] temp = input.toCharArray();
-            for(char state: temp){
+            for(char letter: temp){
 
                 currentState++;
-                //if we are the last letter in a string then set final state
-                if(temp[temp.length-1] == state){
-                    finalState[currentState] = true;
-                }
-                actualAlphabet.add(state);
-                internalAlphabet.put(state, actualAlphabet.indexOf(state));
+
+//                //if first letter in string
+//                if(letter == input.indexOf(0)){
+//                    //if the letter already is in list, go back to initial state
+//                    if(!(tempAlphabet.contains(letter)))
+//                    {
+//                        nfa[(currentState - 1)][internalAlphabet.get(letter)].add((currentState));
+//                        tempAlphabet.add(letter);
+//                    }
+//                    else{
+//                        nfa[0][internalAlphabet.get(letter)].add((currentState));
+//                    }
+//                }
+
                 //if the letter already is in list, go back to initial state
-                if(actualAlphabet.contains(state))
+                if(letter == temp[0]){
+                    nfa[0][internalAlphabet.get(letter)].add((currentState));
+                }
+                else if(!(tempAlphabet.contains(letter)))
                 {
-                    nfa[0][internalAlphabet.get(state)].add((currentState));
+                    nfa[(currentState - 1)][internalAlphabet.get(letter)].add((currentState));
+                    tempAlphabet.add(letter);
                 }
                 else{
-                    nfa[currentState - 1][internalAlphabet.get(state)].add((currentState ));
+
+                        nfa[currentState-1][internalAlphabet.get(letter)].add(currentState);
+
+
                 }
+
+
             }
         }
 
+    }
+
+    private void initializeSets() {
+        nfa = new HashSet[totalStates][actualAlphabet.size()];
+
+        for(int i = 0; i < totalStates; i++){
+            for(int j = 0; j < actualAlphabet.size(); j++){
+                nfa[i][j] = new HashSet<Integer>();
+            }
+        }
     }
 
 
@@ -138,6 +185,18 @@ public class NFSA {
      */
     private void setFinalStates(){
         finalState = new boolean[totalStates];
+        int currentState = 0;
+        for(String input: initInput) {
+            char[] temp = input.toCharArray();
+            for (char state : temp) {
+
+                currentState++;
+                //if we are the last letter in a string then set final state
+                if (temp[temp.length - 1] == state) {
+                    finalState[currentState] = true;
+                }
+            }
+        }
     }
 
     /**
@@ -147,12 +206,27 @@ public class NFSA {
      *
      */
     private void loadStates(){
+        //check to see if line is empty
         if(firstLine.isEmpty())
             System.out.println("Error!");
         else{
+
             initInput = firstLine.split(" ");
+            int count = 0;
             for(String input: initInput){
                 totalStates += input.length();
+                char[] temp = input.toCharArray();
+                //for each character, add unique ones to alphabet list
+                //also map
+                for(char state: temp){
+
+                    if(!(actualAlphabet.contains(state)))
+                        actualAlphabet.add(state);
+                    if(!(internalAlphabet.containsKey(state))){
+                        internalAlphabet.put(state, count);
+                        count++;
+                    }
+                }
             }
         }
     }
