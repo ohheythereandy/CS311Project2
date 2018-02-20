@@ -57,6 +57,9 @@ public class FileInput {
                     testStrings = getTesters();
                     //Pass on info to FSA
                     NFSA nfa = new NFSA(initialRead, testStrings, counter);
+
+                    testStrings.clear();
+
                     counter++;
                 }
                 if(currentLine==null)

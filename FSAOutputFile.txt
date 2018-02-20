@@ -36,6 +36,17 @@ state 5: r 7
 state 6: e 8
 state 7: none
 state 8: none
+(4) Strings: 
+      care       Accepted
+      b       Rejected
+      be       Accepted
+      bea       Rejected
+      bears       Rejected
+      bear       Accepted
+      cars       Rejected
+      car       Rejected
+      c       Rejected
+      beare       Rejected
 -------------------------
 Non-Finite State Automaton #2
 (1) Number of States: 24
@@ -105,6 +116,17 @@ state 12: none
 state 13: r 14
 state 14: e 15
 state 15: none
+(4) Strings: 
+      E       Rejected
+      prog       Rejected
+      program       Accepted
+      procram       Rejected
+      procedures       Rejected
+      proceed       Accepted
+      procee       Rejected
+      procedure       Accepted
+      procedurr       Rejected
+      noprocedure       Rejected
 -------------------------
 Non-Finite State Automaton #3
 (1) Number of States: 44
@@ -223,3 +245,14 @@ state 25: c 27
 state 26: none
 state 27: e 28
 state 28: none
+(4) Strings: 
+      finall       Rejected
+      inter       Rejected
+      throws       Accepted
+      does       Rejected
+      do       Accepted
+      int       Accepted
+      final       Accepted
+      throwthrows       Rejected
+      interface       Accepted
+      int_double       Rejected

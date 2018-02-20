@@ -86,16 +86,16 @@ public class DFSA {
             writer.write("(2) Final States: " + printFinalStates() + "\n");
             writer.write("(3) Transitions:\n");
             printTransitions(writer);
-//
-//            writer.write("(4) Strings: \n" );
-//
-//            for(String s: testers){
-//
-//                if(testFSA(s))
-//                    writer.write("      " + s + "       " + "Accepted\n");
-//                else
-//                    writer.write("      " + s + "       " + "Rejected\n");
-//            }
+
+           writer.write("(4) Strings: \n" );
+
+            for(String s: testers){
+
+                if(testFSA(s))
+                    writer.write("      " + s + "       " + "Accepted\n");
+                else
+                    writer.write("      " + s + "       " + "Rejected\n");
+            }
 
             writer.close();
         }
@@ -106,7 +106,63 @@ public class DFSA {
     }
 
     private boolean testFSA(String s) {
-        return false;
+
+        //set state to initial state and boolean to false
+        int state = 0;
+        int testCount = 0;
+        boolean exit = false;
+        char[] ch = s.toCharArray();
+        boolean ret = false;
+
+        while(!exit){
+
+            int symbol;
+            if(testCount < s.length()){
+
+                if(!(internalAlphabet.containsKey(ch[testCount]))){
+                    return false;
+                }
+
+                symbol = internalAlphabet.get(ch[testCount]);
+
+            }
+            else{
+                symbol = 100;
+            }
+
+            //check to see if character is in alphabet
+            if(reverseAlphabet.containsKey(symbol)){
+                state = fsa_machine[state][symbol];
+
+                //check to see if trap state
+                if(state == 0){
+                    exit = true;
+                    ret = false;
+                }
+
+            }
+            else{
+                exit = true;
+
+                if(!(isEndMarker(s, testCount))){
+                   ret = false;
+                }
+                else if(finalState[state]){
+                    ret = true;
+                }
+                else{
+                    ret = false;
+                }
+            }
+            testCount++;
+        }
+
+        return ret;
+    }
+
+    private boolean isEndMarker(String s, int testCount) {
+
+        return s.length() == (testCount);
     }
 
     private void printTransitions(BufferedWriter writer) throws IOException {
