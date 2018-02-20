@@ -31,6 +31,9 @@ public class NFSA {
         loadMachine();
         printToFile(iteration);
 
+        //Create new DFSA from NFSA info
+        DFSA dfa = new DFSA(nfa, internalAlphabet,finalState, transitionArray, testers, iteration);
+
 
     }
 
@@ -47,15 +50,17 @@ public class NFSA {
             writer.write("(4) Transitions:\n");
             printTransitions(writer);
 
-            writer.write("(5) Strings: \n" );
+//            writer.write("(5) Strings: \n" );
+//
+//            for(String s: testers){
+//
+//                if(testFSA(s))
+//                    writer.write("      " + s + "       " + "Accepted\n");
+//                else
+//                    writer.write("      " + s + "       " + "Rejected\n");
+//            }
 
-            for(String s: testers){
-
-                if(testFSA(s))
-                    writer.write("      " + s + "       " + "Accepted\n");
-                else
-                    writer.write("      " + s + "       " + "Rejected\n");
-            }
+            writer.close();
 
         }
         catch(IOException i){
@@ -63,10 +68,13 @@ public class NFSA {
         }
     }
 
-    private boolean testFSA(String s) {
-        return false;
-    }
 
+    /**
+     * This method is responsible for printing the transitions loaded into the table by traversing through the array,
+     * looking for non empty sets.
+     * @param bw is used to write to the file
+     * @throws IOException if file can't be written to
+     */
     private void printTransitions(BufferedWriter bw) throws IOException {
         //traverse through 2D array of sets to print transitions
         for(int i = 0; i < nfa.length; i++){
@@ -75,7 +83,7 @@ public class NFSA {
 
                 if(!(nfa[i][j].isEmpty())){
                     //bw.write("        " + "i " + actualAlphabet.get(j).toString() +  "\n");
-                    transitionArray.add("        " + "i " + actualAlphabet.get(j).toString() + printSet(i,j) +  "\n");
+                    transitionArray.add("        " + i + " " + actualAlphabet.get(j).toString() + "  " + printSet(i,j) +  "\n");
                 }
             }
         }
@@ -169,6 +177,9 @@ public class NFSA {
 
     }
 
+    /**
+     * To intialize all sets within nfa in an effort to avoid NullPointerException
+     */
     private void initializeSets() {
         nfa = new HashSet[totalStates][actualAlphabet.size()];
 
