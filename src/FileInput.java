@@ -1,5 +1,8 @@
 /**
  * Created by Andy on 2/13/18.
+ * This class is responsible for reading input from the file and passing along necessary information to
+ * NFSA class for Automata construction
+ * Most parsing is done by NFSA class
  */
 
 import java.io.FileNotFoundException;

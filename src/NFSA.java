@@ -1,5 +1,7 @@
 /**
  * Created by Andy on 2/15/18.
+ * This class represents the NFSA object. In this program, it is instantiated by FileInput for every set of input fitting
+ * a complete machine from the MachineInput.txt file
  */
 import java.util.*;
 import java.io.*;
@@ -18,6 +20,13 @@ public class NFSA {
     Set<Integer>[][] nfa;
 
 
+    /**
+     * Class constructor. Calls appropriate methods to load machine fields and attributes before printing
+     * @param initialRead is the string containing input strings for the machine
+     * @param testStrings is the string containing test strings
+     * @param iteration is the identifying number for the current automata
+     * @throws IOException if file can't be written to
+     */
     public NFSA(String initialRead, ArrayList<String> testStrings, int iteration) throws IOException{
 
         firstLine = initialRead;
@@ -32,15 +41,20 @@ public class NFSA {
         printToFile(iteration);
 
         //Create new DFSA from NFSA info
-        DFSA dfa = new DFSA(nfa, internalAlphabet,finalState, transitionArray, testers, iteration);
+        DFSA dfa = new DFSA(nfa, internalAlphabet,finalState, testers, iteration);
 
 
     }
 
+    /**
+     * This method is responsible for printing to the file
+     * @param iteration is the FSA number being tested
+     * @throws IOException whenever file can't be written to
+     */
     private void printToFile(int iteration) throws IOException{
 
         try {
-            FileWriter fw = new FileWriter("FSAOutputFile.txt", true);
+            FileWriter fw = new FileWriter("MachineOutput.txt", true);
             BufferedWriter writer = new BufferedWriter(fw);
             writer.write("-------------------------\n");
             writer.write("Non-Finite State Automaton #" + iteration + "\n");
@@ -49,16 +63,6 @@ public class NFSA {
             writer.write("(3) Alphabet: " + ALPHABET + "\n");
             writer.write("(4) Transitions:\n");
             printTransitions(writer);
-
-//            writer.write("(5) Strings: \n" );
-//
-//            for(String s: testers){
-//
-//                if(testFSA(s))
-//                    writer.write("      " + s + "       " + "Accepted\n");
-//                else
-//                    writer.write("      " + s + "       " + "Rejected\n");
-//            }
 
             writer.close();
 
@@ -94,7 +98,12 @@ public class NFSA {
         }
     }
 
-    //This method navigates through given set and returns a string of all the integers in the set
+    /**
+     * This method navigates through given set and returns a string of all the integers in the set
+     * @param firstIndex is the index for the row array in 2D array
+     * @param secondIndex is the index for the column in the 2d Array
+     * @return string representing integers in the set
+     */
     private String printSet(int firstIndex, int secondIndex){
         StringBuilder sb = new StringBuilder();
         Set<Integer> tempSet = nfa[firstIndex][secondIndex];
@@ -130,8 +139,9 @@ public class NFSA {
         initializeSets();
 
         int currentState = 0;
-        int lastPass = 0;
         ArrayList<Character> tempAlphabet = new ArrayList<>();
+
+
         //loop through characters in each string and add each one to the list of letters and the map to number it
         //Also start creating nfa by adding transitions.
         //currentState represents the count of state we are in
@@ -141,19 +151,6 @@ public class NFSA {
             for(char letter: temp){
 
                 currentState++;
-
-//                //if first letter in string
-//                if(letter == input.indexOf(0)){
-//                    //if the letter already is in list, go back to initial state
-//                    if(!(tempAlphabet.contains(letter)))
-//                    {
-//                        nfa[(currentState - 1)][internalAlphabet.get(letter)].add((currentState));
-//                        tempAlphabet.add(letter);
-//                    }
-//                    else{
-//                        nfa[0][internalAlphabet.get(letter)].add((currentState));
-//                    }
-//                }
 
                 //if the letter already is in list, go back to initial state
                 if(letter == temp[0]){

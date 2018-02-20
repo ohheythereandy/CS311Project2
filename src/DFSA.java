@@ -1,11 +1,11 @@
 /**
  * Created by Andy on 2/18/18.
+ * This class represents the DFSA object
+ * Information passed to it from the NFSA class where it is instantiated for every NFSA
  */
 import java.io.*;
 import java.util.*;
 public class DFSA {
-
-    private static final String ALPHABET = "a b c d e f g h i j k l m n o p q r s t u v w x y z";
 
 
     private HashMap<Character, Integer> internalAlphabet;
@@ -16,9 +16,16 @@ public class DFSA {
     int[][] fsa_machine;
 
 
-    //List to keep track of
-
-    public DFSA(Set<Integer>[][] nfa, HashMap<Character, Integer> internalAlphabet, boolean[] finalState, ArrayList<String> transitionArray, ArrayList<String> testers, int iteration) throws IOException{
+    /**
+     * Class constructor
+     * @param nfa is the 2d array of sets representing the NFA
+     * @param internalAlphabet is the mapping of characters to an integer
+     * @param finalState is the array of final states for the nfa
+     * @param testers is the set of test strings to run the machine against
+     * @param iteration is the machine count
+     * @throws IOException if file can't be written to for whatever reason
+     */
+    public DFSA(Set<Integer>[][] nfa, HashMap<Character, Integer> internalAlphabet, boolean[] finalState, ArrayList<String> testers, int iteration) throws IOException{
 
         this.internalAlphabet = internalAlphabet;
         getReverseAlphaMap();
@@ -31,6 +38,9 @@ public class DFSA {
         printToFile(iteration);
     }
 
+    /**
+     * This method creates a map reversing the key value pairs in the initial internalAlphabet map
+     */
     private void getReverseAlphaMap() {
         reverseAlphabet = new HashMap<>();
 
@@ -40,12 +50,16 @@ public class DFSA {
 
     }
 
-    private void getFinalStates() {
+    /**
+     * This method parses through our list of State objects to identify final states from previous final state information
+     */
+    private void getFinalStates(){
 
         finalState = new boolean[stateList.size()];
 
         List<Integer> finalStateList = new ArrayList<>();
 
+        //add final states to list
         for(int i = 0 ; i < oldFinalState.length; i++){
 
             if(oldFinalState[i]){
@@ -75,10 +89,15 @@ public class DFSA {
 
     }
 
+    /**
+     * This method is responsible for printing to the file
+     * @param iteration is the FSA number being tested
+     * @throws IOException whenever file can't be written to
+     */
     private void printToFile(int iteration) throws IOException{
         
         try{
-            FileWriter fw = new FileWriter("FSAOutputFile.txt", true);
+            FileWriter fw = new FileWriter("MachineOutput.txt", true);
             BufferedWriter writer = new BufferedWriter(fw);
             writer.write("-------------------------\n");
             writer.write("Finite State Automaton #" + iteration + "\n");
@@ -105,6 +124,11 @@ public class DFSA {
         
     }
 
+    /**
+     * This is the implementation of the algorithm outlined in the Project Document
+     * @param s is the current string being tested against the FSA
+     * @return true if string is accepted by FSA, false otherwise
+     */
     private boolean testFSA(String s) {
 
         //set state to initial state and boolean to false
@@ -160,11 +184,23 @@ public class DFSA {
         return ret;
     }
 
+    /**
+     * This method compares the string length to the index counter to see if we are at the end of the string
+     * @param s is the current test string
+     * @param testCount is the current index within the test string that we are currently at
+     * @return true if end of string, false otherwise
+     */
     private boolean isEndMarker(String s, int testCount) {
 
         return s.length() == (testCount);
     }
 
+    /**
+     * This method prints transitions by traversing the List of State objects and seeing if their corresponding
+     * transitions are empty
+     * @param writer is the bufferedwriter used to write to the file
+     * @throws IOException if the file can't be written to
+     */
     private void printTransitions(BufferedWriter writer) throws IOException {
 
         for(State currentState: stateList){
@@ -220,6 +256,12 @@ public class DFSA {
 
     }
 
+    /**
+     * Implementation of subset construction algorithm covered in lecture
+     * Use Queue to keep track of which state sets we need to create states for
+     * Keep track of what state sets are already accounted for using list
+     * @param nfa is the nfa 2D array of sets we use to build our DFA from
+     */
     private void subsetConstruction(Set<Integer>[][] nfa) {
 
         //set initial state to 0
@@ -258,7 +300,7 @@ public class DFSA {
     /**
      * In this method we build the transition table for the dfa
      * We go through each state, looking at its transition list and matching it to an existing set in our list
-     * We then set
+     * We then set the identifier of the matching state set to the integer in the 2d array
      */
     private void buildTransitionTable() {
 
@@ -281,6 +323,12 @@ public class DFSA {
         }
     }
 
+    /**
+     * Helper function for buildTransitionTable()
+     * Looks through existing state list for a matching set of current states. Get the identifier of the matching set
+     * @param workingSet is the set we are looking for a match for
+     * @return identifier of matching state set
+     */
     private int findEquivalentSet(Set<Integer> workingSet) {
 
         int ret = 0;
@@ -293,15 +341,4 @@ public class DFSA {
         return ret;
     }
 
-    //This method navigates through given set and returns a string of all the integers in the set
-    private String returnSet(int firstIndex, int secondIndex, Set<Integer>[][] nfa){
-        StringBuilder sb = new StringBuilder();
-        Set<Integer> tempSet = nfa[firstIndex][secondIndex];
-
-        for(Integer i : tempSet){
-            sb.append(i + " ");
-        }
-
-        return sb.toString();
-    }
 }
