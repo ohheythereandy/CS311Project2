@@ -9,6 +9,7 @@ public class DFSA {
 
 
     private HashMap<Character, Integer> internalAlphabet;
+    private HashMap<Integer, Character> reverseAlphabet;
     private boolean[] oldFinalState, finalState;
     private ArrayList<String> testers, transitionArray;
     private ArrayList<State> stateList = new ArrayList<>();
@@ -20,13 +21,23 @@ public class DFSA {
     public DFSA(Set<Integer>[][] nfa, HashMap<Character, Integer> internalAlphabet, boolean[] finalState, ArrayList<String> transitionArray, ArrayList<String> testers, int iteration) throws IOException{
 
         this.internalAlphabet = internalAlphabet;
+        getReverseAlphaMap();
         oldFinalState = finalState;
-        this.transitionArray = transitionArray;
+        this.transitionArray = new ArrayList<>();
         this.testers = testers;
 
         subsetConstruction(nfa);
         getFinalStates();
         printToFile(iteration);
+    }
+
+    private void getReverseAlphaMap() {
+        reverseAlphabet = new HashMap<>();
+
+        for(char i : internalAlphabet.keySet()){
+            reverseAlphabet.put(internalAlphabet.get(i), i);
+        }
+
     }
 
     private void getFinalStates() {
@@ -73,8 +84,8 @@ public class DFSA {
             writer.write("Finite State Automaton #" + iteration + "\n");
             writer.write("(1) Number of States: " + stateList.size() + "\n");
             writer.write("(2) Final States: " + printFinalStates() + "\n");
-//            writer.write("(3) Transitions:\n");
-//            printTransitions();
+            writer.write("(3) Transitions:\n");
+            printTransitions(writer);
 //
 //            writer.write("(4) Strings: \n" );
 //
@@ -98,7 +109,43 @@ public class DFSA {
         return false;
     }
 
-    private void printTransitions() {
+    private void printTransitions(BufferedWriter writer) throws IOException {
+
+        for(State currentState: stateList){
+
+            StringBuilder sb = new StringBuilder();
+            sb.append("state " + currentState.getID() + ": " );
+            boolean existTransition = false;
+
+            HashMap<Integer, Integer> temp = new HashMap<>();
+            for(int j = 0; j < fsa_machine[currentState.getID()].length; j++){
+
+                if(fsa_machine[currentState.getID()][j] != 0){
+                    temp.put(j, fsa_machine[currentState.getID()][j]);
+                    existTransition = true;
+                }
+            }
+
+            if(existTransition){
+
+                for(int i : temp.keySet()){
+
+                    if(temp.size() == 1){
+                        sb.append(reverseAlphabet.get(i) + " "  + temp.get(i));
+                    }
+                    else{
+                        sb.append( reverseAlphabet.get(i) + " "  + temp.get(i) + ", ");
+                    }
+                }
+
+
+            }
+            else{
+                sb.append("none");
+            }
+
+            writer.write(sb.toString() + "\n");
+        }
 
     }
 
