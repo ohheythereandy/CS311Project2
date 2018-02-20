@@ -2,9 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="71de32dd-7829-4df4-b6ae-3d963424b863" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/CS311Project2/NFSA.class" afterPath="$PROJECT_DIR$/out/production/CS311Project2/NFSA.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/FSAOutputFile.txt" afterPath="$PROJECT_DIR$/FSAOutputFile.txt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/DFSA.java" afterPath="$PROJECT_DIR$/src/DFSA.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/FileInput.java" afterPath="$PROJECT_DIR$/src/FileInput.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/NFSA.java" afterPath="$PROJECT_DIR$/src/NFSA.java" />
     </list>
     <ignored path="CS311Project2.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -29,22 +30,22 @@
       <file leaf-file-name="MachineInput.txt" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/MachineInput.txt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="15">
-              <caret line="1" column="0" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
+            <state relative-caret-position="75">
+              <caret line="5" column="0" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="NFSA.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="NFSA.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/NFSA.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="480">
-              <caret line="32" column="0" selection-start-line="32" selection-start-column="0" selection-end-line="32" selection-end-column="0" />
+            <state relative-caret-position="174">
+              <caret line="202" column="44" selection-start-line="202" selection-start-column="44" selection-end-line="202" selection-end-column="44" />
               <folding>
                 <element signature="n#!!doc" expanded="true" />
                 <element signature="imports" expanded="true" />
-                <marker date="1519074546991" expanded="true" signature="4856:5432" ph="..." />
+                <marker date="1519099250956" expanded="true" signature="4856:5432" ph="..." />
               </folding>
             </state>
           </provider>
@@ -53,8 +54,8 @@
       <file leaf-file-name="DFSA.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/DFSA.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="729">
-              <caret line="122" column="33" selection-start-line="122" selection-start-column="33" selection-end-line="122" selection-end-column="33" />
+            <state relative-caret-position="-2722">
+              <caret line="91" column="0" selection-start-line="91" selection-start-column="0" selection-end-line="91" selection-end-column="0" />
               <folding>
                 <element signature="n#!!doc" expanded="true" />
                 <element signature="imports" expanded="true" />
@@ -66,7 +67,7 @@
       <file leaf-file-name="State.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/State.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="675">
+            <state relative-caret-position="473">
               <caret line="67" column="23" selection-start-line="67" selection-start-column="23" selection-end-line="67" selection-end-column="23" />
               <folding>
                 <element signature="e#1224#1225#0" expanded="true" />
@@ -84,11 +85,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="FSAOutputFile.txt" pinned="false" current-in-tab="true">
+      <file leaf-file-name="FSAOutputFile.txt" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/FSAOutputFile.txt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="3090">
-              <caret line="252" column="23" selection-start-line="252" selection-start-column="23" selection-end-line="252" selection-end-column="23" />
+            <state relative-caret-position="3825">
+              <caret line="255" column="19" selection-start-line="255" selection-start-column="19" selection-end-line="255" selection-end-column="19" />
               <folding />
             </state>
           </provider>
@@ -97,8 +98,8 @@
       <file leaf-file-name="FileInput.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/FileInput.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="270">
-              <caret line="61" column="0" selection-start-line="61" selection-start-column="0" selection-end-line="61" selection-end-column="0" />
+            <state relative-caret-position="114">
+              <caret line="58" column="0" selection-start-line="58" selection-start-column="0" selection-end-line="58" selection-end-column="0" />
               <folding>
                 <element signature="n#!!doc" expanded="true" />
                 <element signature="imports" expanded="true" />
@@ -129,11 +130,11 @@
       <list>
         <option value="$PROJECT_DIR$/MachineInput.txt" />
         <option value="$PROJECT_DIR$/src/Main.java" />
-        <option value="$PROJECT_DIR$/src/NFSA.java" />
         <option value="$PROJECT_DIR$/src/State.java" />
         <option value="$PROJECT_DIR$/src/DFSA.java" />
         <option value="$PROJECT_DIR$/src/FileInput.java" />
         <option value="$PROJECT_DIR$/FSAOutputFile.txt" />
+        <option value="$PROJECT_DIR$/src/NFSA.java" />
       </list>
     </option>
   </component>
@@ -674,12 +675,12 @@
       <updated>1518575077425</updated>
       <workItem from="1518575079393" duration="4373000" />
       <workItem from="1518745054693" duration="22239000" />
-      <workItem from="1519070353053" duration="18954000" />
+      <workItem from="1519070353053" duration="20211000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="45566000" />
+    <option name="totallyTimeSpent" value="46823000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="24" width="1280" height="752" extended-state="6" />
@@ -727,13 +728,13 @@
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/DFSA.java</url>
-          <line>91</line>
+          <url>file://$PROJECT_DIR$/src/NFSA.java</url>
+          <line>29</line>
           <properties />
-          <option name="timeStamp" value="36" />
+          <option name="timeStamp" value="40" />
         </line-breakpoint>
       </breakpoints>
-      <option name="time" value="38" />
+      <option name="time" value="41" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -765,7 +766,7 @@
           <folding>
             <element signature="n#!!doc" expanded="true" />
             <element signature="imports" expanded="true" />
-            <marker date="1519074546991" expanded="true" signature="4856:5432" ph="..." />
+            <marker date="1519099250956" expanded="true" signature="4856:5432" ph="..." />
           </folding>
         </state>
       </provider>
@@ -893,15 +894,34 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/MachineInput.txt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="15">
-          <caret line="1" column="0" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
+        <state relative-caret-position="75">
+          <caret line="5" column="0" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/FileInput.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="114">
+          <caret line="58" column="0" selection-start-line="58" selection-start-column="0" selection-end-line="58" selection-end-column="0" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/FSAOutputFile.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3825">
+          <caret line="255" column="19" selection-start-line="255" selection-start-column="19" selection-end-line="255" selection-end-column="19" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/State.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="675">
+        <state relative-caret-position="473">
           <caret line="67" column="23" selection-start-line="67" selection-start-column="23" selection-end-line="67" selection-end-column="23" />
           <folding>
             <element signature="e#1224#1225#0" expanded="true" />
@@ -920,8 +940,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/DFSA.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="729">
-          <caret line="122" column="33" selection-start-line="122" selection-start-column="33" selection-end-line="122" selection-end-column="33" />
+        <state relative-caret-position="-2722">
+          <caret line="91" column="0" selection-start-line="91" selection-start-column="0" selection-end-line="91" selection-end-column="0" />
           <folding>
             <element signature="n#!!doc" expanded="true" />
             <element signature="imports" expanded="true" />
@@ -931,32 +951,13 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/NFSA.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="480">
-          <caret line="32" column="0" selection-start-line="32" selection-start-column="0" selection-end-line="32" selection-end-column="0" />
+        <state relative-caret-position="174">
+          <caret line="202" column="44" selection-start-line="202" selection-start-column="44" selection-end-line="202" selection-end-column="44" />
           <folding>
             <element signature="n#!!doc" expanded="true" />
             <element signature="imports" expanded="true" />
-            <marker date="1519074546991" expanded="true" signature="4856:5432" ph="..." />
+            <marker date="1519099250956" expanded="true" signature="4856:5432" ph="..." />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/FileInput.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="61" column="0" selection-start-line="61" selection-start-column="0" selection-end-line="61" selection-end-column="0" />
-          <folding>
-            <element signature="n#!!doc" expanded="true" />
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/FSAOutputFile.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3090">
-          <caret line="252" column="23" selection-start-line="252" selection-start-column="23" selection-end-line="252" selection-end-column="23" />
-          <folding />
         </state>
       </provider>
     </entry>

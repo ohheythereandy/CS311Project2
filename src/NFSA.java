@@ -198,15 +198,9 @@ public class NFSA {
         finalState = new boolean[totalStates];
         int currentState = 0;
         for(String input: initInput) {
-            char[] temp = input.toCharArray();
-            for (char state : temp) {
 
-                currentState++;
-                //if we are the last letter in a string then set final state
-                if (temp[temp.length - 1] == state) {
-                    finalState[currentState] = true;
-                }
-            }
+            currentState += (input.length());
+            finalState[currentState] = true;
         }
     }
 
